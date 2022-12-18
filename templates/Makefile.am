@@ -5,6 +5,7 @@ templates_SCRIPTS = \
 	lxc-altlinux \
 	lxc-archlinux \
 	lxc-centos \
+	lxc-centos-stream \
 	lxc-cirros \
 	lxc-debian \
 	lxc-devuan \

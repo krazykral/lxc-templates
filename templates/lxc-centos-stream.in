@@ -439,7 +439,7 @@ download_centos()
     # always prefer the repo given by the user
     # if no repo given, use mirrorlist.centos.org for i386 and x86_64
     # and http://mirror.centos.org/altarch/ otherwise
-    REPO_FILE=$INSTALL_ROOT/etc/yum.repos.d/lxc-centos-temp.repo
+    REPO_FILE=$INSTALL_ROOT/etc/yum.repos.d/lxc-centos-stream-temp.repo
     mkdir -p $(dirname $REPO_FILE)
     # This means CentOS Stream 8
     if [ "$release" -ge 8 ]; then
@@ -630,7 +630,7 @@ install_centos()
 
     return 0
 
-    ) 9>/var/lock/subsys/lxc-centos
+    ) 9>/var/lock/subsys/lxc-centos-stream
 
     return $?
 }
@@ -733,7 +733,7 @@ clean()
         rm --preserve-root --one-file-system -rf $cache && echo "Done." || exit 1
         exit 0
 
-    ) 9>@LOCALSTATEDIR@/lock/subsys/lxc-centos
+    ) 9>@LOCALSTATEDIR@/lock/subsys/lxc-centos-stream
 }
 
 usage()
