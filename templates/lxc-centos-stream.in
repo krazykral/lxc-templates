@@ -432,7 +432,7 @@ download_centos()
     else
        YUM="$YUM0"
     fi
-    PKG_LIST="dnf yum initscripts passwd vim-minimal openssh-server openssh-clients dhclient chkconfig rootfiles policycoreutils cronie"
+    PKG_LIST="dnf yum initscripts passwd rsyslog vim-minimal dhclient chkconfig rootfiles policycoreutils cronie"
     #PKG_LIST="yum initscripts passwd rsyslog vim-minimal openssh-server openssh-clients dhclient chkconfig rootfiles policycoreutils cronie"
 
     # use temporary repository definition
@@ -492,7 +492,6 @@ name=CentOS-$release - Updates
 baseurl=http://mirror.centos.org/altarch/7/updates/$basearch/
 EOF
     	fi
-    fi
 
     # create minimal device nodes, needed for "yum install" and "yum update" process
     mkdir -p $INSTALL_ROOT/dev
@@ -516,6 +515,13 @@ EOF
         rmdir $INSTALL_ROOT/var/run
         ln -sf ../run $INSTALL_ROOT/var/run
     fi
+
+    if [ "$release" = "9" ]; then
+        mv $INSTALL_ROOT/var/run/* $INSTALL_ROOT/run/
+        rmdir $INSTALL_ROOT/var/run
+        ln -sf ../run $INSTALL_ROOT/var/run
+    fi
+
 
     if [ $? -ne 0 ]; then
         echo "Failed to download the rootfs, aborting."
